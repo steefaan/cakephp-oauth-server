@@ -1,14 +1,11 @@
 {
-	"name" : "shaggybb/cakephp-oauth-server",
+	"name" : "thomseddon/cakephp-oauth-server",
 	"description" : "CakePHP OAuth2 Server Plugin",
 	"type" : "cakephp-plugin",
 	"authors" : [{
 			"name" : "Thom Seddon",
 			"homepage" : "http://www.thomseddon.co.uk/",
 			"role" : "Author"
-		}, {
-			"name" : "Ivan Rubio",
-			"role" : "Developer"
 		}, {
 			"name" : "CakePHP Community",
 			"homepage" : "https://github.com/thomseddon/cakephp-oauth-server/graphs/contributors"
@@ -19,7 +16,7 @@
 		"oauth",
 		"server"
 	],
-	"homepage" : "https://github.com/shaggybb/cakephp-oauth-server",
+	"homepage" : "https://github.com/thomseddon/cakephp-oauth-server",
 	"license" : [
 		"MIT"
 	],
@@ -29,8 +26,8 @@
 	},
 	"support" : {
 		"forum" : "http://stackoverflow.com/tags/cakephp",
-		"source" : "https://github.com/shaggybb/cakephp-oauth-server",
-		"issues" : "https://github.com/shaggybb/cakephp-oauth-serverissues",
+		"source" : "https://github.com/thomseddon/cakephp-oauth-server",
+		"issues" : "https://github.com/thomseddon/cakephp-oauth-serverissues",
 		"irc" : "irc://irc.freenode.org/cakephp"
 	},
 	"extra" : {
