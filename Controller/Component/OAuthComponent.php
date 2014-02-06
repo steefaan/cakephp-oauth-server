@@ -21,6 +21,7 @@ App::uses('Router', 'Routing');
 App::uses('Security', 'Utility');
 App::uses('Hash', 'Utility');
 App::uses('AuthComponent', 'Controller');
+App::uses('BlowfishPasswordHasher', 'Controller/Component/Auth');
 
 App::import('Vendor', 'oauth2-php/lib/OAuth2');
 App::import('Vendor', 'oauth2-php/lib/IOAuth2Storage');
@@ -555,15 +556,36 @@ class OAuthComponent extends Component implements IOAuth2Storage, IOAuth2Refresh
 	public function checkUserCredentials($client_id, $username, $password) {
 		$user = $this->User->find('first', array(
 			'conditions' => array(
-				$this->authenticate['fields']['username'] => $username,
-				$this->authenticate['fields']['password'] => AuthComponent::password($password)
-			),
-			'recursive' => -1
+				$this->authenticate['fields']['username'] => $username
+			)
+		));
+		if ($user) {
+
+			// It's better to support different PasswordHasher.
+			// Maybe we can improve the options array with passwordHasher =>
+
+			$passwordHasher = new BlowfishPasswordHasher();
+			if ($passwordHasher->check($password, $user['User'][$this->authenticate['fields']['password']])) {
+				return array('user_id' => $user['User'][$this->User->primaryKey]);
+			}
+		}
+		return false;
+
+		/* Original by thomseddon
+		 * https://github.com/thomseddon/cakephp-oauth-server/blob/master/Controller/Component/OAuthComponent.php#L555-L567
+		return array('user_id' => 1);
+		$user = $this->User->find('first', array(
+				'conditions' => array(
+						$this->authenticate['fields']['username'] => $username,
+						$this->authenticate['fields']['password'] => AuthComponent::password($password)
+				),
+				'recursive' => -1
 		));
 		if ($user) {
 			return array('user_id' => $user['User'][$this->User->primaryKey]);
 		}
 		return false;
+		*/
 	}
 
 /**
